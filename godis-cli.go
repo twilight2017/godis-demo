@@ -1,4 +1,4 @@
-package demo
+package main
 
 import (
 	"bufio"
@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	IPPort := "127.0.0.1:9736"
+	IPPort := "127.0.0.1:8000"
 
 	reader := bufio.NewReader(os.Stdin)
 
