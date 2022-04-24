@@ -19,6 +19,7 @@ func main() {
 	}
 	fmt.Println("删除后：", map1)
 	//3.清空map
+	/*Go语言没有为map提供情况所有元素的函数，清空map的唯一方法时重新make一个新的map*/
 	map1 = make(map[string]string)
 	fmt.Println("清空后", map1)
 }
