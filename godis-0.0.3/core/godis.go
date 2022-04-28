@@ -163,5 +163,18 @@ func (c *Client)ReadQueryFromClient(conn net.Conn) (err error){
 	c.QueryBuf = string(buff)
 	return nil
   }
-  return errors.New("ProcessInputBuffer failed")
+}
+
+// ProcessInputBuffer 处理客户端请求信息
+func (c *Client) ProcessInputBuffer() error{
+	decoder := proto.NewDecoder(bytes.NewReader([]byte(c.QueryBuf)))
+	if resp, err := decoder.DecodeMultiBulk();err==nil{
+		c.Argc = len(resp)
+		c.Argv = make([]*GodisObject, c.Argc)
+		for k, s := range resp{
+			c.Argv[k] = CreateObject(ObjectTypeString, string(s.Value))
+		}
+		return nil
+	}
+	return errors.New("ProcessInputBuffer failed")
 }
