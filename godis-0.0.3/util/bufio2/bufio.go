@@ -53,6 +53,7 @@ func (b *Reader) fill() error {
 	return b.err
 }
 
+//返回缓存中现有的可读取的字节数
 func (b *Reader) buffered() int {
 	return b.wpos - b.rpos //wpos是尾部下标，rbos是首部下标
 }
@@ -240,4 +241,17 @@ func (b *Writer) WriteString(s string) (nn int, err error) {
 	n := copy(b.buf[b.wpos:], s)
 	b.wpos += n
 	return nn + n, nil
+}
+
+func (b *Reader) PeekByte() (byte, error) {
+	if b.err != nil {
+		return 0, b.err
+	}
+	if b.buffered() == 0 {
+		if b.fill() != nil {
+			return 0, b.err
+		}
+	}
+	c := b.buf[b.rpos]
+	return c, nil
 }
