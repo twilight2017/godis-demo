@@ -26,7 +26,7 @@ func main() {
 		fmt.Print(IPPort + "> ")
 		text, _ := reader.ReadString('\n')
 		//清除掉回车换行符
-		text = strings.Replace(text, "\n", "", -1)
+		//text = strings.Replace(text, "\n", "", -1)
 		send2Server(text, conn)
 
 		buff := make([]byte, 1024) //内存分配原语，创建长度为1024的int型slice

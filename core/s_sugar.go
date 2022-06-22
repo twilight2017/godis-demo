@@ -14,4 +14,5 @@ func main() {
 	//语法糖
 	emp1.name = "Das"
 	emp1.age = 45
+	emp1.sex = 1
 }
